@@ -45,6 +45,13 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
+    public function addProducts(array $products): void
+    {
+        foreach($products as $product){
+            $this->add($product);
+        }
+    }
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */

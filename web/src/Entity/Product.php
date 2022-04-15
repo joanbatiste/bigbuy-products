@@ -93,7 +93,7 @@ class Product
     private $priceRetail;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $pvp;
 
@@ -377,7 +377,7 @@ class Product
         return $this->pvp;
     }
 
-    public function setPvp(float $pvp): self
+    public function setPvp(?float $pvp): self
     {
         $this->pvp = $pvp;
 
