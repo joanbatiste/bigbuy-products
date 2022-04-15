@@ -1,0 +1,47 @@
+# Symfony | Magento Apache
+/var/www/html/var/log/*.log {
+    su www-data www-data
+    weekly
+    missingok
+    rotate 4
+    compress
+    sharedscripts
+    copytruncate
+    size 100M
+}
+
+# Wordpress Apache
+/var/www/html/wp-content/debug.log {
+    su www-data www-data
+    weekly
+    missingok
+    rotate 4
+    compress
+    sharedscripts
+    copytruncate
+    size 100M
+}
+
+# Symfony | Magento PHPfpm
+/app/var/log/*.log {
+    su www-data www-data
+    weekly
+    missingok
+    rotate 4
+    compress
+    sharedscripts
+    copytruncate
+    size 100M
+}
+
+# Wordpress PHPfpm
+/app/wp-content/debug.log {
+    su www-data www-data
+    weekly
+    missingok
+    rotate 4
+    compress
+    sharedscripts
+    copytruncate
+    size 100M
+}
