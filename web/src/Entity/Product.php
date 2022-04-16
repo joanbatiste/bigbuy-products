@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -183,9 +185,14 @@ class Product
     private $productImages = [];
 
     /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $productAttributes = [];
+    * @ORM\OneToMany(targetEntity="Attribute", mappedBy="product", cascade={"persist"})
+    */
+    private $productAttributes;
+
+    public function __constructor()
+    {
+        $this->productAttributes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -588,7 +595,7 @@ class Product
         return $this;
     }
 
-    public function getProductAttributes(): ?array
+    public function getProductAttributes(): ?Collection
     {
         return $this->productAttributes;
     }
