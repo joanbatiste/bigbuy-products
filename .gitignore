@@ -18,3 +18,5 @@
 /web/phpunit.xml
 /web/.phpunit.result.cache
 ###< phpunit/phpunit ###
+
+.mysql-data

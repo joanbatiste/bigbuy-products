@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\DependencyInjection;
+Use \SimpleXMLElement;
 
 class ProductController extends AbstractController
 {
@@ -92,6 +94,27 @@ class ProductController extends AbstractController
     */
     public function productsXml(): Response
     {
-        
+        $xmlProductsFile = file_get_contents('../public/files/Articulos.xml');
+        $products = new SimpleXMLElement($xmlProductsFile);
+        foreach ($products->Articulo as $product) {
+            
+            $bbProduct = new Product();
+            $bbProduct->setSku($product->Codigo);
+            $bbProduct->setDescription($product->Descripcion);
+            $bbProduct->setEan13($product->CodigoBarras);
+            $bbProduct->setPvp(floatval($product->Precio));
+            $bbProduct->setPriceWholesale(floatval($product->PrecioBase));
+            $bbProduct->setPartNumber($product->Surtido);
+            $bbProduct->setStock(intval($product->Cantidad));
+            $bbProduct->setStockToShow(intval($product->StockReal));
+            $bbProduct->setStockCatalog(intval($product->StockTeorico));
+            $bbProduct->setStockAvailable(intval($product->StockDisponible));
+            $bbProduct->setCategoryName($product->VMD);
+            $this->productRepository->add($bbProduct);
+        }
+
+        return $this->render('product/index.html.twig', [
+            'controller_name' => 'XML IMPORTADO',
+        ]);
     }
 }
