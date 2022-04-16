@@ -22,6 +22,11 @@ class Product
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $productIdentifier;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $sku;
 
     /**
@@ -63,6 +68,16 @@ class Product
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $categoryName;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $categoryName2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $categoryName3;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -147,6 +162,11 @@ class Product
     /**
      * @ORM\Column(type="float", nullable=true)
      */
+    private $cbm;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
     private $weightMaster;
 
     /**
@@ -197,6 +217,18 @@ class Product
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getProductIdentifier(): ?string
+    {
+        return $this->productIdentifier;
+    }
+
+    public function setProductIdentifier(?string $productIdentifier): self
+    {
+        $this->productIdentifier = $productIdentifier;
+
+        return $this;
     }
 
     public function getSku(): ?string
@@ -303,6 +335,30 @@ class Product
     public function setCategoryName(?string $categoryName): self
     {
         $this->categoryName = $categoryName;
+
+        return $this;
+    }
+
+    public function getCategoryName2(): ?string
+    {
+        return $this->categoryName2;
+    }
+
+    public function setCategoryName2(?string $categoryName2): self
+    {
+        $this->categoryName2 = $categoryName2;
+
+        return $this;
+    }
+
+    public function getCategoryName3(): ?string
+    {
+        return $this->categoryName3;
+    }
+
+    public function setCategoryName3(?string $categoryName3): self
+    {
+        $this->categoryName3 = $categoryName3;
 
         return $this;
     }
@@ -495,6 +551,18 @@ class Product
     public function setLengthPackaging(?float $lengthPackaging): self
     {
         $this->lengthPackaging = $lengthPackaging;
+
+        return $this;
+    }
+
+    public function getCbm(): ?float
+    {
+        return $this->cbm;
+    }
+
+    public function setCbm(?float $cbm): self
+    {
+        $this->cbm = $cbm;
 
         return $this;
     }
