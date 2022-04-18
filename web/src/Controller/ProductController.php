@@ -33,7 +33,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/{fileType}", name="app_product")
      */
-    public function index(Request $request, $fileType): Response
+    public function index($fileType): Response
     {
         if($fileType !== 'xml' && $fileType !== 'xlsx' && $fileType !== 'json' ){
             $accessError = 'Lo sentimos, tu petición no se ha podido procesar';
@@ -48,7 +48,7 @@ class ProductController extends AbstractController
                 $productController = 'Importador de productos XML';
                 break;
             case 'xlsx':
-                $this->readerXlsxService->getProductsFromXlsx();
+                $response = $this->readerXlsxService->getProductsFromXlsx();
                 $productController = 'Importador de productos XLSX';
                 break;
             case 'json':
