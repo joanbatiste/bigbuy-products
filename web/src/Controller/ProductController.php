@@ -33,7 +33,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/{fileType}", name="app_product")
      */
-    public function index($fileType): Response
+    public function index(Request $request, $fileType): Response
     {
         if($fileType !== 'xml' && $fileType !== 'xlsx' && $fileType !== 'json' ){
             $accessError = 'Lo sentimos, tu petición no se ha podido procesar';
@@ -44,16 +44,16 @@ class ProductController extends AbstractController
 
         switch($fileType){
             case 'xml':
-                $this->readerXmlService->getProductsFromXml();
-                $productController = 'Soy el archivo XML';
+                $response = $this->readerXmlService->getProductsFromXml();
+                $productController = 'Importador de productos XML';
                 break;
             case 'xlsx':
                 $this->readerXlsxService->getProductsFromXlsx();
-                $productController = 'Soy el archivo XLSX';
+                $productController = 'Importador de productos XLSX';
                 break;
             case 'json':
                 $this->readerJsonService->getProductsFromJson();
-                $productController = 'Soy el archivo JSON';
+                $productController = 'Importador de productos JSON';
                 break;
             default:
                 break;
@@ -61,6 +61,8 @@ class ProductController extends AbstractController
 
         return $this->render('product/index.html.twig', [
             'controller_name' => $productController,
+            'new' => $response['productsInserted'],
+            'updated' => $response['productsUpdated']
         ]);
     }
 }
