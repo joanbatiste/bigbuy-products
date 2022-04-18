@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}Importador de productos{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,18 @@
 </style>
 
 <div class="example-wrapper">
+    {% if access_error is defined %}
+    <div>
+        <p>{{ access_error }}</p>
+    </div>
+    {% endif %}
+    {% if controller_name is defined %}
     <h1>Hello Products! ✅</h1>
-
-    This friendly message is coming from:
+    {{controller_name}}
     <ul>
         <li>Your controller at <code><a href="{{ '/var/www/html/src/Controller/ProductController.php'|file_link(0) }}">src/Controller/ProductController.php</a></code></li>
         <li>Your template at <code><a href="{{ '/var/www/html/templates/product/index.html.twig'|file_link(0) }}">templates/product/index.html.twig</a></code></li>
     </ul>
+    {% endif %}
 </div>
 {% endblock %}
