@@ -28,17 +28,17 @@ class ReaderXmlService
         foreach ($products->Articulo as $product) {     
             $productExist = $this->productRepository->findOneBySku($product->Codigo);
             if($productExist){
-                $this->updateProduct($product, $productExist);
+                $this->updateProductFromXml($product, $productExist);
                 ++$productsUpdated;
             }else{
-                $this->addNewProduct($product);
+                $this->addNewProductFromXml($product);
                 ++$productsInserted;
             }    
         }
         return ['productsInserted' => $productsInserted, 'productsUpdated' => $productsUpdated];
     }
 
-    private function updateProduct(SimpleXMLElement $product, Product $productExist)
+    private function updateProductFromXml(SimpleXMLElement $product, Product $productExist)
     {
         $productExist->setDescription($product->Descripcion);
         $productExist->setEan13($product->CodigoBarras);
@@ -54,7 +54,7 @@ class ReaderXmlService
         $this->productRepository->persist($productExist);
     }
 
-    private function addNewProduct(SimpleXMLElement $product)
+    private function addNewProductFromXml(SimpleXMLElement $product)
     {
         $bbProduct = new Product();
         $bbProduct->setSku($product->Codigo);

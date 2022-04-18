@@ -69,15 +69,16 @@ class AttributeRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Product
+    public function findOneByIdAndProductId($productId, $attId): ? Attribute
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+        return $this->createQueryBuilder('attribute')
+            ->andWhere('attribute.product = :productId')
+            ->setParameter('productId', $productId)
+            ->andWhere('attribute.attributeId = :attId')
+            ->setParameter('attId', $attId)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+    
 }

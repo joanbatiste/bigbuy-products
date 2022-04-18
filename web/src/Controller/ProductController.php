@@ -52,7 +52,7 @@ class ProductController extends AbstractController
                 $productController = 'Importador de productos XLSX';
                 break;
             case 'json':
-                $this->readerJsonService->getProductsFromJson();
+                $response = $this->readerJsonService->getProductsFromJson();
                 $productController = 'Importador de productos JSON';
                 break;
             default:
