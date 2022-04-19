@@ -4,11 +4,14 @@ namespace App\Service;
 
 use App\Entity\Product;
 Use \SimpleXMLElement;
+use App\Util\FilesToImport;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Response;
 
 class ReaderXmlService
 {
+
+    use FilesToImport;
     private ProductRepository $productRepository;
 
     public function __construct
@@ -21,7 +24,7 @@ class ReaderXmlService
 
     public function getProductsFromXml()
     {
-        $xmlProductsFile = file_get_contents('../public/files/Articulos.xml');
+        $xmlProductsFile = file_get_contents($this->xmlFile);
         $products = new SimpleXMLElement($xmlProductsFile);
         $productsInserted = 0;
         $productsUpdated = 0;

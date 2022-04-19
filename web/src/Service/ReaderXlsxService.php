@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Product;
 use App\Entity\Attribute;
 use App\Util\ColumnsXlsx;
+use App\Util\FilesToImport;
 use App\Repository\ProductRepository;
 use App\Repository\AttributeRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 class ReaderXlsxService
 {
     use ColumnsXlsx;
+    use FilesToImport;
 
     private ProductRepository $productRepository;
     private AttributeRepository $attributeRepository;
@@ -30,7 +32,7 @@ class ReaderXlsxService
 
     public function getProductsFromXlsx()
     {
-        $spreadsheet = IOFactory::load("../public/files/Productos.xlsx");
+        $spreadsheet = IOFactory::load($this->xlsxFile);
         $data = $spreadsheet->getActiveSheet()->toArray();
         $headers = array_shift($data);
         $productsInserted = 0;

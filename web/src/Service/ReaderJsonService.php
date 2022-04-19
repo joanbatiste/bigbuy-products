@@ -4,12 +4,14 @@ namespace App\Service;
 
 use App\Entity\Product;
 use App\Entity\Attribute;
+use App\Util\FilesToImport;
 use App\Repository\ProductRepository;
 use App\Repository\AttributeRepository;
 use Symfony\Component\HttpFoundation\Response;
 
 class ReaderJsonService
 {
+    use FilesToImport;
     private ProductRepository $productRepository;
     private AttributeRepository $attributeRepository;
 
@@ -25,7 +27,7 @@ class ReaderJsonService
 
     public function getProductsFromJson()
     {
-        $jsonProducts = file_get_contents('../public/files/catalog.json');
+        $jsonProducts = file_get_contents($this->jsonFile);
         $products = json_decode($jsonProducts, true);
         $productsArray = [];
         foreach($products as $key => $value){
