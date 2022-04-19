@@ -40,5 +40,5 @@ php bin/console d:m:migrate
 ```
 
  
- Si todo ha ido bien, debes de tener el proyecto funcionando en tu localhost. No olvides que para comprobar las funcionalidades que requieran envío de emails tienes que tener levantado tu contenedor de mailhog local.
+ Si todo ha ido bien, debes de tener el proyecto funcionando en tu localhost.
 
